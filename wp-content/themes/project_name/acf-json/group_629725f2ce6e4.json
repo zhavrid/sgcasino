@@ -237,10 +237,10 @@
                             "button_label": "",
                             "sub_fields": [
                                 {
-                                    "key": "field_68c2e97da1162",
-                                    "label": "Icon",
+                                    "key": "field_68c57a18dd013",
+                                    "label": "Icon SVG Code",
                                     "name": "icon",
-                                    "type": "image",
+                                    "type": "textarea",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -249,16 +249,11 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "return_format": "id",
-                                    "preview_size": "medium",
-                                    "library": "all",
-                                    "min_width": "",
-                                    "min_height": "",
-                                    "min_size": "",
-                                    "max_width": "",
-                                    "max_height": "",
-                                    "max_size": "",
-                                    "mime_types": ""
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "maxlength": "",
+                                    "rows": "",
+                                    "new_lines": ""
                                 },
                                 {
                                     "key": "field_68c2e99da1163",
@@ -300,5 +295,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1757604271
+    "modified": 1757772335
 }

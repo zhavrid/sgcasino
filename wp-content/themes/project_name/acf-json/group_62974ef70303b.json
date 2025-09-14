@@ -47,8 +47,8 @@
                 },
                 {
                     "key": "field_68c2d093c43e7",
-                    "label": "Title",
-                    "name": "title",
+                    "label": "Subtitle",
+                    "name": "subtitle",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -66,8 +66,8 @@
                 },
                 {
                     "key": "field_68c2d09ac43e8",
-                    "label": "Description",
-                    "name": "description",
+                    "label": "Title",
+                    "name": "title",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -123,5 +123,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1757600619
+    "modified": 1757687652
 }

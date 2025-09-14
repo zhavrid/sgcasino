@@ -1,9 +1,8 @@
 jQuery(function($){
-    // делегирование — работает для динамически добавленных элементов
-    $(document).on('click', '.delete-slot', function(e){
+    $(document).on('click', '.slots__list__item-delete', function(e){
         e.preventDefault();
 
-        if (!confirm('Удалить этот слот?')) return;
+        if (!confirm('delete this slot?')) return;
 
         var $btn = $(this);
         var slotId = $btn.data('id');
@@ -14,7 +13,7 @@ jQuery(function($){
         }
 
         $.ajax({
-            url: sgcasino_ajax.ajax_url,       // из wp_localize_script
+            url: sgcasino_ajax.ajax_url,
             method: 'POST',
             dataType: 'json',
             data: {
@@ -24,16 +23,13 @@ jQuery(function($){
             },
             success: function(response){
                 if (response.success) {
-                    // аккуратно убрать элемент из DOM
-                    $btn.closest('.slot-item').fadeOut(200, function(){ $(this).remove(); });
+                    $btn.closest('.slots__list__item').fadeOut(200, function(){ $(this).remove(); });
                 } else {
-                    alert('Ошибка: ' + (response.data || 'Неизвестная ошибка'));
+                    alert('Error: ' + (response.data || 'Unknown error'));
                 }
             },
             error: function(xhr, status, error){
-                // покажем подробную ошибку в консоль и уведомим пользователя
                 console.error('AJAX error', xhr.responseText);
-                alert('Сетевая ошибка, см. консоль (F12)');
             }
         });
     });

@@ -18,9 +18,9 @@ if ( class_exists( 'App\\Init' ) ) {
 // Добавляем метабокс в правую колонку
 function slot_add_custom_meta_box() {
     add_meta_box(
-        'slot_link_meta',           // ID метабокса
-        'Link',         // Заголовок
-        'slot_link_meta_callback',  // Функция вывода
+        'slot_link_meta',
+        'Link',
+        'slot_link_meta_callback',
         'post',                     // Тип записи (можно заменить на 'slot', если будет отдельный CPT)
         'side',                     // Где показывать (side = правая колонка)
         'default'                   // Приоритет
@@ -58,37 +58,48 @@ add_action('save_post', 'slot_save_link_meta');
 
 
 
-// Обработка формы добавления слотов
-function sgcasino_handle_add_slot() {
-    if ( isset($_POST['submit_slot']) ) {
-        // Проверка nonce
-        if ( !isset($_POST['slot_nonce']) || !wp_verify_nonce($_POST['slot_nonce'], 'add_slot_nonce') ) {
-            return;
-        }
-
-        // Проверка прав
-        if ( !is_user_logged_in() || !current_user_can('publish_posts') ) {
-            return;
-        }
-
+add_action('init', function() {
+    if (
+        isset($_POST['submit_slot']) &&
+        isset($_POST['slot_nonce']) &&
+        wp_verify_nonce($_POST['slot_nonce'], 'add_slot_nonce')
+    ) {
         $title   = sanitize_text_field($_POST['slot_title']);
         $content = sanitize_textarea_field($_POST['slot_content']);
+        $link    = esc_url_raw($_POST['slot_link']);
 
-        // Создаём пост
-        $post_id = wp_insert_post(array(
+        $post_id = wp_insert_post([
             'post_title'   => $title,
             'post_content' => $content,
+            'post_type'    => 'post',
             'post_status'  => 'publish',
-            'post_type'    => 'post', // можно заменить на кастомный CPT slots
-        ));
+        ]);
 
         if ($post_id && !is_wp_error($post_id)) {
-            wp_safe_redirect(home_url()); // редиректим на главную
-            exit;
+            // Сохраняем ссылку
+            if ($link) {
+                update_post_meta($post_id, '_slot_link', $link);
+            }
+
+            // Загружаем картинку, если есть
+            if (!empty($_FILES['slot_image']['name'])) {
+                require_once(ABSPATH . 'wp-admin/includes/file.php');
+                require_once(ABSPATH . 'wp-admin/includes/image.php');
+                require_once(ABSPATH . 'wp-admin/includes/media.php');
+
+                $attachment_id = media_handle_upload('slot_image', $post_id);
+                if (!is_wp_error($attachment_id)) {
+                    set_post_thumbnail($post_id, $attachment_id);
+                }
+            }
         }
+
+        // Перенаправляем, чтобы избежать повторной отправки
+        wp_safe_redirect(home_url());
+        exit;
     }
-}
-add_action('template_redirect', 'sgcasino_handle_add_slot');
+});
+
 
 
 

@@ -1,7 +1,27 @@
 {
     "key": "group_68c2ff7e2172d",
     "title": "Slot Form",
-    "fields": [],
+    "fields": [
+        {
+            "key": "field_68c72b9dff253",
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
     "location": [
         [
             {
@@ -20,5 +40,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1757609882
+    "modified": 1757883302
 }

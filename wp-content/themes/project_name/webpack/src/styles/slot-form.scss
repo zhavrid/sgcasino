@@ -1,6 +1,55 @@
 .slots {
   padding: 28px 20px;
 
+  &-title {
+    color: white;
+    text-transform: uppercase;
+    font-size: 24px;
+
+    @media screen and (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
+
+  .slotsSwiper {
+    padding: 50px 20px 20px;
+    margin: -30px -20px 0;
+
+    .swiper-scrollbar {
+      background: transparent;
+      border-radius: 4px;
+      height: 10px;
+      bottom: 0;
+
+      @media screen and (min-width: 768px) {
+        display: none;
+      }
+
+      &-drag {
+        background: $blue-text;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+      }
+    }
+
+    &__buttons {
+      position: absolute;
+      right: 60px;
+      top: 22px;
+
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+
+      .swiper-button-next {
+        right: -45px;
+      }
+      .swiper-button-prev {
+        left: -35px;
+      }
+    }
+  }
+
   &__list {
     display: flex;
     align-items: center;
@@ -9,6 +58,8 @@
     &__item {
       position: relative;
       list-style: none;
+      width: 100% !important;
+      max-width: 180px;
 
       &-thumb {
 

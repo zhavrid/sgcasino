@@ -24,8 +24,15 @@ $help_centre = $header['help_centre'];
 <header>
     <nav class="header__nav">
         <div class="header__nav__logo">
-            <button class="header__nav-sidebar" id="sidebarToggle">
+            <button class="header__nav-sidebar desk" id="sidebarToggle">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 16 16" fill="none">\n' + '\n' + '<g fill="#deefff">\n' + '\n' + '<path d="M11.726 5.263a.7.7 0 10-.952-1.026l-3.5 3.25a.7.7 0 000 1.026l3.5 3.25a.7.7 0 00.952-1.026L8.78 8l2.947-2.737z"/>\n' + '\n' + '<path fill-rule="evenodd" d="M1 3.25A2.25 2.25 0 013.25 1h9.5A2.25 2.25 0 0115 3.25v9.5A2.25 2.25 0 0112.75 15h-9.5A2.25 2.25 0 011 12.75v-9.5zm2.25-.75a.75.75 0 00-.75.75v9.5c0 .414.336.75.75.75h1.3v-11h-1.3zm9.5 11h-6.8v-11h6.8a.75.75 0 01.75.75v9.5a.75.75 0 01-.75.75z" clip-rule="evenodd"/>\n' + '\n' + '</g>\n' + '\n' + '</svg>
+            </button>
+            <button class="header__nav-sidebar mobile" id="sidebarToggleMobile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 18L20 18" stroke="#deefff" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M4 12L20 12" stroke="#deefff" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M4 6L20 6" stroke="#deefff" stroke-width="2" stroke-linecap="round"/>
+                </svg>
             </button>
             <?php echo wp_get_attachment_image($header['header_logo'],'full'); ?>
         </div>
@@ -54,6 +61,8 @@ $help_centre = $header['help_centre'];
         </div>
     </nav>
 </header>
+
+<div id="overlay"></div>
 
 <div class="sidebar" id="sidebar">
     <div class="sidebar__top">

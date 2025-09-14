@@ -1,44 +1,49 @@
+<?php
+$title = get_field('title');
+?>
+
 <section class="slots">
-    <ul class="slots__list">
-        <?php
-        $slots = new WP_Query([
-            'post_type'      => 'post',
-            'posts_per_page' => 20,
-        ]);
+    <?php if ($title): ?>
+        <h2 class="slots-title"><?php echo $title ?></h2>
+    <?php endif ?>
 
-        if ($slots->have_posts()):
-            while ($slots->have_posts()): $slots->the_post();
+    <div class="swiper slotsSwiper">
+        <div class="swiper-wrapper">
+            <?php
+            $slots = new WP_Query([
+                'post_type'      => 'post',
+                'posts_per_page' => 20,
+            ]);
 
-                $link = get_post_meta(get_the_ID(), '_slot_link', true);
+            if ($slots->have_posts()):
+                while ($slots->have_posts()): $slots->the_post();
 
-                if (!$link) {
-                    $link = get_permalink();
-                }
-                ?>
+                    $link = get_post_meta(get_the_ID(), '_slot_link', true);
+                    if (!$link) {
+                        $link = get_permalink();
+                    }
+                    ?>
+                    <div class="swiper-slide slots__list__item" id="slot-<?php the_ID(); ?>">
+                        <a class="slots__list__item-thumb" href="<?php echo esc_url($link); ?>">
+                            <?php the_post_thumbnail('medium'); ?>
+                        </a>
+                        <button class="slots__list__item-delete" data-id="<?php the_ID(); ?>"></button>
+                    </div>
+                <?php endwhile;
+                wp_reset_postdata();
+            endif;
+            ?>
+        </div>
 
-                <li class="slots__list__item" id="slot-<?php the_ID(); ?>">
-
-                    <a class="slots__list__item-thumb" href="<?php echo esc_url($link); ?>">
-<!--                        <h3>--><?php //the_title(); ?><!--</h3>-->
-<!--                        <div class="slots__list__item-content">--><?php //the_excerpt(); ?><!--</div>-->
-                        <?php the_post_thumbnail('medium'); ?>
-                    </a>
-                    <button class="slots__list__item-delete" data-id="<?php the_ID(); ?>"></button>
-                </li>
-            <?php endwhile;
-            wp_reset_postdata();
-        endif;
-        ?>
-    </ul>
+        <div class="slotsSwiper__buttons">
+            <div class="swiper-button-next butt-slider"></div>
+            <div class="swiper-button-prev butt-slider"></div>
+        </div>
+        <div class="swiper-scrollbar"></div>
+    </div>
 
     <?php if ( is_user_logged_in() ) : ?>
-        <form class="slots__form" id="slot-form" method="post" action="" enctype="multipart/form-data">
-<!--            <label for="slot-title">Name:</label>-->
-<!--            <input type="text" name="slot_title" id="slot-title" required>-->
-<!---->
-<!--            <label for="slot-content">Description:</label>-->
-<!--            <textarea name="slot_content" id="slot-content"></textarea>-->
-
+        <form class="slots__form" id="slot-form" method="post" enctype="multipart/form-data">
             <label for="slot-link">Link:</label>
             <input type="url" name="slot_link" id="slot-link" placeholder="https://example.com">
 

@@ -7,16 +7,25 @@ $hero_slide = get_field('hero_slide');
         <div class="swiper-wrapper">
             <?php foreach ($hero_slide as $row) {
                 $img = $row['img'];
+                $img_mobile = $row['img_mobile'];
                 $subtitle = $row['subtitle'];
                 $title = $row['title'];
                 $button_text = $row['button_text'];
                 $img_url = $img ? wp_get_attachment_image_url($img, 'full') : '';
+                $img_mobile_url = $img_mobile ? wp_get_attachment_image_url($img_mobile, 'full') : '';
                 ?>
                 <div class="swiper-slide">
                     <button class="hero__block" id="hero-popup"
                         <?php if ($img_url): ?>
                             style="background-image: url('<?php echo esc_url($img_url); ?>');"
                         <?php endif; ?>>
+                        <style>
+                            @media screen and (max-width: 1024px) {
+                                .hero__block{
+                                    background-image: url('<?php echo esc_url($img_mobile_url); ?>');
+                                }
+                            }
+                        </style>
                         <div class="hero__block__text">
                             <div class="hero__block__top">
                                 <?php if ($subtitle): ?>
